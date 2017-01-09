@@ -10,15 +10,6 @@ module.exports = function (app) {
 		}
 	}
 
-	app.get('/', isLoggedIn, function (req, res) {
-			res.sendFile(path + '/build/index.html');
-		});
-
-	app.route('/login')
-		.get(function (req, res) {
-			res.sendFile(path + '/build/login.html');
-		});
-
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();

@@ -4,7 +4,10 @@ module.exports = function (app) {
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
-			res.redirect('/login');
+			res.json({
+				success: false,
+				error: "not authenticated"
+			});
 		}
 	}
 

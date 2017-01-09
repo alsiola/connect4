@@ -1,12 +1,18 @@
 var path = require('path');
 var fs = require('fs');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
-    entry: './src/js/index.js',
+    debug:true,
+    devtool: 'eval-source-map',
+    devServer: {
+        inline: true
+    },
+    entry: './src/client/js/index.js',
     output: {
         filename: 'bundle.js',
-        path: './build',
+        path: path.resolve(__dirname, '/'),
         publicPath: '/'
     },
     module: {
@@ -30,7 +36,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
-        })
+            template: './src/client/index.html'
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ]    
 }
