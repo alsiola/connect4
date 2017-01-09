@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 
 module.exports = {
@@ -31,6 +32,10 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                test:/\.s?css$/,
+                loaders: ["style-loader", "css-loader?modules", "sass-loader", "postcss-loader"]
             }
         ]
     },
@@ -39,5 +44,15 @@ module.exports = {
             template: './src/client/index.html'
         }),
         new webpack.HotModuleReplacementPlugin()
-    ]    
+    ],
+    postcss: () => [
+      autoprefixer({
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9'
+        ]
+      }),
+    ]
 }
