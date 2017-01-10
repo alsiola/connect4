@@ -1,5 +1,31 @@
-var GitHubStrategy = require('passport-github').Strategy;
-var User = require('../model/User');
+const nextTick = require('../utils/nextTick');
+const GitHubStrategy = require('passport-github').Strategy;
+const User = require('../model/User');
+
+const gitHubConfig = {
+	clientID: process.env.GITHUB_KEY,
+	clientSecret: process.env.GITHUB_SECRET,
+	callbackURL: process.env.APP_URL + 'auth/github/callback'
+};
+
+function createUserIfNotExisting(user, profile, provider) {
+	return new Promise((resolve, reject) => {
+		if (user) {
+			resolve(user);
+		}
+
+		const newUser = new User();
+
+		newUser[provider].id = profile.id;
+		newUser[provider].username = profile.username;
+		newUser[provider].displayName = profile.displayName;
+
+		newUser
+		.save()
+		.then(() => resolve(newUser))
+		.catch(reject);
+	});
+}
 
 module.exports = function (passport) {
 	passport.serializeUser(function (user, done) {
@@ -12,36 +38,10 @@ module.exports = function (passport) {
 		});
 	});
 
-	passport.use(new GitHubStrategy({
-		clientID: process.env.GITHUB_KEY,
-		clientSecret: process.env.GITHUB_SECRET,
-		callbackURL: process.env.APP_URL + 'auth/github/callback'
-	},
-	function (token, refreshToken, profile, done) {
-		process.nextTick(function () {
-			User.findOne({ 'github.id': profile.id }, function (err, user) {
-				if (err) {
-					return done(err);
-				}
-
-				if (user) {
-					return done(null, user);
-				} else {
-					var newUser = new User();
-
-					newUser.github.id = profile.id;
-					newUser.github.username = profile.username;
-					newUser.github.displayName = profile.displayName;
-
-					newUser.save(function (err) {
-						if (err) {
-							throw err;
-						}
-
-						return done(null, newUser);
-					});
-				}
-			});
-		});
+	passport.use(new GitHubStrategy(gitHubConfig, (token, refreshToken, profile, done) => {
+		nextTick
+		.then(() => User.findOne({ 'github.id': profile.id }))
+		.then(user => createUserIfNotExisting(user, profile, 'github'))
+		.then(user => done(null, user));
 	}));
 };
