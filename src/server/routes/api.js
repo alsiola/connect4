@@ -1,17 +1,9 @@
-module.exports = function (app) {
+const isLoggedIn = require('../utils/isLoggedIn');
 
-	function isLoggedIn (req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		} else {
-			res.json({
-				success: false,
-				error: "not authenticated"
-			});
-		}
-	}
-
-	app.get('/api/currentuser', isLoggedIn, function (req, res) {
-		res.json({name : req.user.github.displayName});
+module.exports = app => {
+	app.get('/api/currentuser', isLoggedIn, (req, res) => {
+		res.json({
+			name: req.user.github.displayName
+		});
 	});
 };
