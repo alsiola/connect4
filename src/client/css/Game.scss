@@ -1,0 +1,11 @@
+.gameGrid {
+  display:inline-flex;
+  flex-direction: row;
+  align-items: flex-end;  
+  border: 5px solid $grid-border;
+  background: $faded-grid-colour;
+  background: -moz-linear-gradient(top,  $faded-grid-colour 0%, $grid-colour 78%);
+  background: -webkit-linear-gradient(top,  $faded-grid-colour 0%, $grid-colour 78%);
+  background: linear-gradient(to bottom,  $faded-grid-colour 0%, $grid-colour 78%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#0004e1',GradientType=0 );
+}

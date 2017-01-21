@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 
@@ -10,7 +11,7 @@ module.exports = {
     devServer: {
         inline: true
     },
-    entry: './src/client/js/index.js',
+    entry: ['./src/client/index.js', './src/client/css/app.scss'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '/'),
@@ -35,7 +36,7 @@ module.exports = {
             },
             {
                 test:/\.s?css$/,
-                loaders: ["style-loader", "css-loader?modules", "sass-loader", "postcss-loader"]
+                loader: ExtractTextPlugin.extract(["css-loader", "sass-loader", "postcss-loader"])
             }
         ]
     },
@@ -43,7 +44,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new ExtractTextPlugin("styles.css")
     ],
     postcss: () => [
       autoprefixer({
@@ -54,5 +55,8 @@ module.exports = {
           'not ie < 9'
         ]
       }),
-    ]
+    ],
+    sassLoader: {
+        includePaths: ['./node_modules']
+    }
 }
