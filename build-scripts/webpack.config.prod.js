@@ -29,7 +29,9 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+             'process.env': {
+                NODE_ENV: JSON.stringify('production')
+              }
         }),
         new HtmlWebpackPlugin({
             template: './src/client/html/index.html',
