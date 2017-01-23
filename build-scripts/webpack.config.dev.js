@@ -11,7 +11,7 @@ module.exports = {
     devServer: {
         inline: true
     },
-    entry: ['./src/client/index.js', './src/client/css/app.scss'],
+    entry: ['./src/client/js/index.js', './src/client/css/app.scss'],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '/'),
@@ -21,14 +21,14 @@ module.exports = {
         preloaders: [
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loader: 'eslint'
             }
         ],
         loaders: [
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
@@ -36,13 +36,13 @@ module.exports = {
             },
             {
                 test:/\.s?css$/,
-                loader: ExtractTextPlugin.extract(["css-loader", "sass-loader", "postcss-loader"])
+                loader: ExtractTextPlugin.extract(["css-loader?sourceMap=inline", "sass-loader?sourceMap=inline", "postcss-loader?sourceMap=inline"])
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/client/index.html'
+            template: './src/client/html/index.html'
         }),
         new ExtractTextPlugin("styles.css")
     ],

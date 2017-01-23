@@ -3,40 +3,75 @@
   height:50px;
   border-radius:50px;
   border: 5px solid $token-border-colour;
+  z-index: 1000;
+  position:relative;
 
   &.gameToken-enter {
-    transform: translate(0, -500px);
-    opacity: 1;
+    &.position-0 {
+      top: -320px;
+    }
+    &.position-1 {
+      top: -270px;
+    }
+    &.position-2 {
+      top: -220px;
+    }
+    &.position-3 {
+      top: -170px;
+    }
+    &.position-4 {
+      top: -120px;
+    }
+    &.position-5 {
+      top: -70px;
+    }
 
     &.gameToken-enter-active {
-      transform: translate(0,0);
+      top: 0px;
+      transition-property: top;
+      transition-timing-function: ease-in;
+
+        &.position-0 {          
+          transition-duration: 480ms;
+        }
+        &.position-1 {
+          transition-duration: 420ms;
+        }
+        &.position-2 {
+          transition-duration: 360ms;
+        }
+        &.position-3 {
+          transition-duration: 300ms;
+        }
+        &.position-4 {
+          transition-duration: 240ms;
+        }
+        &.position-5 {
+          transition-duration: 180ms;
+        }
+    }
+  }
+
+  &.gameToken-leave {
+    &.gameToken-leave-active {
+      transform: scale(0,0);
       transition: transform 500ms ease-in;
     }
   }
 
-  &.gameToken-leave-active {
-    opacity: 0;
-    transition: opacity 1s ease-out;
-  }
+  
 
   &.red {
     background: $red;
-    background: -moz-radial-gradient(center, ellipse cover, $faded-red 14%, $red 70%);
-    background: -webkit-radial-gradient(center, ellipse cover, $faded-red 14%,$red 70%);
-    background: radial-gradient(ellipse at center, $faded-red 14%,$red 70%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9589', endColorstr='#ff1a00',GradientType=1 );
   }
 
   &.yellow {
     background: $yellow;
-    background: -moz-radial-gradient(center, ellipse cover, $faded-yellow 14%, $yellow 70%);
-    background: -webkit-radial-gradient(center, ellipse cover, $faded-yellow 14%,$yellow 70%);
-    background: radial-gradient(ellipse at center, $faded-yellow 14%,$yellow 70%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9589', endColorstr='#ff1a00',GradientType=1 );
   }
 
   &.winner {
-    animation: celebrate 1s 0s 3;
+    z-index: 1001;
+    animation: celebrate 1s 300ms 3;
     @keyframes celebrate {
       0% {
         transform: scale(1,1)
