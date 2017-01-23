@@ -9,7 +9,8 @@
     "dev:server": "nodemon src/server/server",
     "dev:client": "node build-scripts/webpack-dev-server",
     "build": "SET NODE_ENV=production&& webpack --config build-scripts/webpack.config.prod",
-    "start": "node src/server/server"
+    "start": "node src/server/server",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "axios": "^0.15.3",
