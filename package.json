@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "SET NODE_ENV=production&& webpack --config build-scripts/webpack.config.prod",
     "dev:server": "nodemon src/server/server",
     "dev:client": "node build-scripts/webpack-dev-server",
+    "build": "SET NODE_ENV=production&& webpack --config build-scripts/webpack.config.prod",
     "start": "node src/server/server",
-    "test": "jest",
-    "test:watch": "npm run test -- --watch"
+    "preinstall": "npm install"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -26,35 +25,39 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
-    "redux-thunk": "^2.2.0"
-  },
-  "devDependencies": {
+    "redux-thunk": "^2.2.0",
+
+    // BUILD DEPENDENCIES
+
     "autoprefixer": "^6.6.1",
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.24.1",
+    "node-sass": "^4.2.0",
+    "postcss-loader": "^1.2.1",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0",
+  },
+  "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "chalk": "^1.1.3",
-    "css-loader": "^0.26.1",
     "eslint": "^3.12.2",
     "eslint-config-react-app": "^0.5.0",
     "eslint-plugin-flowtype": "^2.29.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "html-webpack-plugin": "^2.24.1",
     "http-proxy-middleware": "^0.17.3",
-    "node-sass": "^4.2.0",
-    "postcss-loader": "^1.2.1",
     "react-addons-test-utils": "^15.4.1",
     "react-dev-utils": "^0.4.2",
-    "sass-loader": "^4.1.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "babel": {
