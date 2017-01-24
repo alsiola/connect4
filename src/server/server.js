@@ -15,6 +15,6 @@ app.use(express.static('build'));
 require('./routes/highScores')(app);
 require('./routes/saveResult')(app);
 
-const listener = app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+const listener = app.listen(process.env.PORT || 3000, process.env.IP || "localhost", function(){
     console.log("Server listening at", listener.address().address + ":" + listener.address().port);
 });

@@ -4,7 +4,6 @@
   "author": {
     "name": "Alex Young"
   },
-  "main": "index.js",
   "scripts": {
     "dev:server": "nodemon src/server/server",
     "dev:client": "node build-scripts/webpack-dev-server",
@@ -65,11 +64,5 @@
       "es2015",
       "react"
     ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/mocks/styleMock.js"
-    }
   }
 }
