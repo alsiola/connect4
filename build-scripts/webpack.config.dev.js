@@ -1,9 +1,7 @@
 var path = require('path');
-var fs = require('fs');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
 
 module.exports = {
     debug:true,
@@ -11,20 +9,13 @@ module.exports = {
     devServer: {
         inline: true
     },
-    entry: ['./src/client/js/index.js', './src/client/css/app.scss'],
+    entry: ['./src/client/js/index.js', require.resolve('react-dev-utils/webpackHotDevClient'), './src/client/css/app.scss'],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, '/'),
-        publicPath: '/'
+        path: '/',
+        publicPath: './'
     },
     module: {
-        preloaders: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /(node_modules)/,
-                loader: 'eslint'
-            }
-        ],
         loaders: [
             {
                 test: /\.(js|jsx)$/,

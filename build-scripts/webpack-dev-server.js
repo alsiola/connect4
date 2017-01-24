@@ -3,7 +3,7 @@ const webpackDevServer = require('webpack-dev-server');
 const chalk = require('chalk');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const httpProxyMiddleware = require('http-proxy-middleware');
+const path = require('path');
 const config = require('./webpack.config.dev');
 
 process.env.NODE_ENV = 'development';
@@ -47,6 +47,9 @@ compiler.plugin('done', stats => {
 
 
 const server = new webpackDevServer(compiler, {
+    publicPath: '/',
+    contentBase: './',
+    clientLogLevel: 'info',
     hot: true,
     historyApiFallback: true,
     quiet: true,

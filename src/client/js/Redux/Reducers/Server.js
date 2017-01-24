@@ -1,6 +1,12 @@
 import * as actions from '../Actions';
 import update from 'immutability-helper';
 
+const defaultState = {
+    gameResultSaveInProgress: false,
+    gameResultSaveError: false,
+    gameResultSaveSuccess: false
+}
+
 export default function Server(state = defaultState, action) {
     switch (action.type) {
         case actions.GAME_RESULT_SAVE_SENT:
@@ -33,10 +39,4 @@ export default function Server(state = defaultState, action) {
         default:
             return state;
     }
-}
-
-const defaultState = {
-    gameResultSaveInProgress: false,
-    gameResultSaveError: false,
-    gameResultSaveSuccess: false
 }

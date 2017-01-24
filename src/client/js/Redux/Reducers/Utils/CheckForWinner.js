@@ -1,3 +1,10 @@
+const createTokensArray = tokenCoords => {
+    return tokenCoords.map(coord => ({
+        colNumber: coord[0],
+        position: coord[1]
+    }))
+};
+
 export default (tokensInPlay, players) => {
     let winner;
 
@@ -52,10 +59,3 @@ export default (tokensInPlay, players) => {
         colour: ''   
     };
 }
-
-const createTokensArray = tokenCoords => {
-    return tokenCoords.map(coord => ({
-        colNumber: coord[0],
-        position: coord[1]
-    }))
-};

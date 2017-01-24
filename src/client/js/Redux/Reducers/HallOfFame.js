@@ -1,6 +1,14 @@
 import * as actions from '../Actions';
 import update from 'immutability-helper';
 
+const defaultState = {
+    players: [],
+    pages: 0,
+    isLoading: false,
+    loadFailed: false,
+    currentPage: 1
+};
+
 export default function Game(state = defaultState, action) {
     switch (action.type) {
         case actions.HALL_OF_FAME_LOAD_SENT:
@@ -18,7 +26,7 @@ export default function Game(state = defaultState, action) {
                 }
             );
         case actions.HALL_OF_FAME_LOAD_SUCCEEDED:
-            const { players, pages } = action.payload;
+            const { players } = action.payload;
             return update(
                 state,
                 {
@@ -49,11 +57,3 @@ export default function Game(state = defaultState, action) {
             return state;
     }
 }
-
-const defaultState = {
-    players: [],
-    pages: 0,
-    isLoading: false,
-    loadFailed: false,
-    currentPage: 1
-};

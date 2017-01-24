@@ -1,6 +1,6 @@
 export const getNameFromColour = (colour, players) => colour === 'red' ? players[0].name : players[1].name;
 
-export const tokensInPlay = state => state.Game.tokensInPlay;
+export const tokensInPlay = state => state.Animator.animating ? state.Animator.currentFrame : state.Game.tokensInPlay;
 
 export const winner = state => state.Game.winner.colour;
 

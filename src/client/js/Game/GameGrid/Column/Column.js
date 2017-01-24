@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Token from './Token/Token';
 import { connect } from 'react-redux';
 import { winningTokens } from '../../../Redux/Selectors/Game';
+import { isAnimating } from '../../../Redux/Selectors/Animator';
 
 class Column extends React.Component {
     isWinningToken(position) {
@@ -20,13 +21,18 @@ class Column extends React.Component {
     render() {
         return (
             <div className='gameColumn'>
-                <ReactCSSTransitionGroup 
-                    transitionName='gameToken' 
-                    transitionEnterTimeout={500} 
-                    transitionLeaveTimeout={500}
-                >
-                    {this.getTokens().reverse()}            
-                </ReactCSSTransitionGroup>
+                {this.props.isAnimating && this.getTokens()}
+                
+                {!this.props.isAnimating &&
+                    <ReactCSSTransitionGroup 
+                        transitionName='gameToken' 
+                        transitionEnterTimeout={500} 
+                        transitionLeaveTimeout={500}
+                    >
+                        {this.getTokens().reverse()}            
+                    </ReactCSSTransitionGroup>
+                }
+                
             </div>
         );
     }
@@ -48,7 +54,8 @@ Column.propTypes = {
 }
 
 export default connect(state => ({
-    winningTokens: winningTokens(state)
+    winningTokens: winningTokens(state),
+    isAnimating: isAnimating(state)
 }),
 {}
 )(Column);

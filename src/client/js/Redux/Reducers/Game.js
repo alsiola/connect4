@@ -9,6 +9,28 @@ update.extend('$setWins', (wins, players) => {
     })
 });
 
+const getNextToken = prevToken => {
+    return prevToken === 'red' ? 'yellow' : 'red';
+}
+
+const defaultState = {
+    tokensInPlay: [
+        [],[],[],[],[],[],[]
+    ],
+    winner: {},
+    nextToken: 'red',
+    players: [
+        {
+            name:'',
+            wins: 0
+        },
+        {
+            name:'',
+            wins: 0
+        }
+    ]
+}
+
 export default function Game(state = defaultState, action) {
     switch (action.type) {
         case actions.TOKEN_PLAYED:
@@ -94,28 +116,4 @@ export default function Game(state = defaultState, action) {
         default:
             return state;
     }
-}
-
-
-
-const getNextToken = prevToken => {
-    return prevToken === 'red' ? 'yellow' : 'red';
-}
-
-export const defaultState = {
-    tokensInPlay: [
-        [],[],[],[],[],[],[]
-    ],
-    winner: {},
-    nextToken: 'red',
-    players: [
-        {
-            name:'',
-            wins: 0
-        },
-        {
-            name:'',
-            wins: 0
-        }
-    ]
 }

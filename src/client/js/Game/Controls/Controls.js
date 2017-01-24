@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { resetGame, resetScores } from '../../Redux/ActionCreators/Game';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import HallOfFame from '../HallOfFame/HallOfFame';
+import AnimatorControl from './AnimatorControl';
 
 class Controls extends React.Component {    
     constructor() {
@@ -28,6 +29,7 @@ class Controls extends React.Component {
                 </ButtonToolbar>
                 <ButtonToolbar>
                     <Button onClick={() => this.setModalOpen(true)}>Hall Of Fame</Button>
+                    <AnimatorControl />
                 </ButtonToolbar>              
             </Panel>            
         )
