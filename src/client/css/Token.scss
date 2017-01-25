@@ -1,55 +1,42 @@
+@mixin positionAnimation($n) {
+  // Create rules for positions 0 to n-1
+
+  $i: 0;
+  @while $i <= $n {
+    &.position-#{$i} {
+      @include getPositionStyle($i);
+      $i: $i + 1;
+    }
+  }
+}
+
+@mixin getPositionStyle($pos) {
+  // Start each token from the top of its column - adjusting for the tokens below it
+  top: -($columnHeight) + ($tokenDiameter * $pos);
+
+  &.gameToken-enter-active {
+    top: 0px;    
+    transition-property: top;
+    transition-timing-function: ease-in;
+
+    // Animate dropping over less time if we are moving a shorter distance
+    transition-duration: 480ms - (60ms * $pos);
+  }
+}
+
 .gameToken {
-  width:50px;
-  height:50px;
-  border-radius:50px;
+  width:$tokenDiameter;
+  height:$tokenDiameter;
+  border-radius:$tokenDiameter / 2;
   border: 5px solid $token-border-colour;
+
+  // z-index so we are above the dropbutton
   z-index: 1000;
   position:relative;
 
   &.gameToken-enter {
-    &.position-0 {
-      top: -320px;
-    }
-    &.position-1 {
-      top: -270px;
-    }
-    &.position-2 {
-      top: -220px;
-    }
-    &.position-3 {
-      top: -170px;
-    }
-    &.position-4 {
-      top: -120px;
-    }
-    &.position-5 {
-      top: -70px;
-    }
-
-    &.gameToken-enter-active {
-      top: 0px;
-      transition-property: top;
-      transition-timing-function: ease-in;
-
-        &.position-0 {          
-          transition-duration: 480ms;
-        }
-        &.position-1 {
-          transition-duration: 420ms;
-        }
-        &.position-2 {
-          transition-duration: 360ms;
-        }
-        &.position-3 {
-          transition-duration: 300ms;
-        }
-        &.position-4 {
-          transition-duration: 240ms;
-        }
-        &.position-5 {
-          transition-duration: 180ms;
-        }
-    }
+    // 6 is the number of possible token positions within a column
+    @include positionAnimation(6);
   }
 
   &.gameToken-leave {
@@ -58,8 +45,6 @@
       transition: transform 500ms ease-in;
     }
   }
-
-  
 
   &.red {
     background: $red;
@@ -70,7 +55,9 @@
   }
 
   &.winner {
+    // position winning tokens above others
     z-index: 1001;
+    
     animation: celebrate 1s 300ms 3;
     @keyframes celebrate {
       0% {

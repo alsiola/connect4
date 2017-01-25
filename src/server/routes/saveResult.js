@@ -7,7 +7,7 @@ const createIfNotPresent = (player, name) => {
             return;
         }
 
-        new Player({name})
+        new Player({ name })
         .save((err, savedPlayer) => {
             if (err) {
                 reject(err);
@@ -46,21 +46,21 @@ const addWin = player => {
     return player;
 }
 
-const updateLoser = name => {
-    return findOrCreatePlayer(name)
-    .then(player => addGame(player))
-    .then(player => player.save())
-}
-
 const findOrCreatePlayer = name => {
     return findPlayerByName(name)
     .then(player => createIfNotPresent(player, name));
 }
 
+const updateLoser = name => {
+    return findOrCreatePlayer(name)
+    .then(addGame)
+    .then(player => player.save())
+}
+
 const updateWinner = name => {
     return findOrCreatePlayer(name)
-    .then(player => addWin(player))
-    .then(player => addGame(player))
+    .then(addWin)
+    .then(addGame)
     .then(player => player.save())
 }
 

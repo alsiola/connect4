@@ -1,13 +1,19 @@
 import React from 'react';
+import classnames from 'classnames';
 
 class Token extends React.Component {
     render() {
-        let className = 'gameToken ';
-        className += this.props.colour + (this.props.isWinner ? ' winner ' : ' ');
-        className += 'position-' + this.props.position;
+        const classes = classnames(
+            'gameToken',
+             'position-' + this.props.position,
+             this.props.colour,
+             {
+                 winner: this.props.isWinner
+             }
+        );
 
         return (
-            <div className={className}>
+            <div className={classes}>
             </div>
         );
     }
