@@ -45,7 +45,6 @@ compiler.plugin('done', stats => {
     log("Listening on localhost:8080");
 });
 
-
 const server = new webpackDevServer(compiler, {
     publicPath: '/',
     contentBase: './',
@@ -60,8 +59,6 @@ const server = new webpackDevServer(compiler, {
         }
     }
 })
-
-
 
 server.listen(8080, 'localhost', (err, result) => {
     if (err) {
